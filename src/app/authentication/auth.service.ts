@@ -1,21 +1,20 @@
 import { Injectable } from '@angular/core';
 import { user } from '../user';
 import { BehaviorSubject } from 'rxjs';
-import { NavigationStart, Router } from '@angular/router';
-import { Location } from '@angular/common';
+import { Router } from '@angular/router';
 import { PageVisitTrackerService } from '../page-visit-tracker.service';
 
 let users = [
-  new user('admin', '123'),
-  new user('user', '123'),
-  new user('user2', '123'),
+  new user('admin@localhost', 'admin@12345678'),
+  new user('user1@localhost', 'user1@12345678'),
+  new user('user2@localhost', 'user2@12345678'),
 ];
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  showBtn: boolean = false;
+  showBtn: boolean = true;
   user = new user();
   userType: BehaviorSubject<string> = new BehaviorSubject<any>(
     this.getUserType()
@@ -23,28 +22,25 @@ export class AuthService {
 
   constructor(
     private _router: Router,
-    private pageVisitTracker: PageVisitTrackerService,
+    private pageVisitTracker: PageVisitTrackerService
   ) {}
-
 
   getUserType() {
     return localStorage.getItem('user');
   }
 
-  // get isLoggedIn() {
-  //   return true;
-  // }
+ 
 
   isSuperAdmin() {
-    if (localStorage.getItem('user') === 'admin') {
+    if (localStorage.getItem('user') === 'admin@localhost') {
       return true;
     } else {
       return false;
     }
   }
 
-  login(username: string, password: string) {
-    debugger
+  login(username: string, password: string): any {
+    //debugger
     this.user.username = username;
     this.user.password = password;
 
@@ -57,8 +53,8 @@ export class AuthService {
       this.userType.next(this.user.username);
       this._router.navigate(['/home']);
     } else {
-      alert('Please Enter Valid Username/Password..!!');
-     
+      this.showBtn = false;
+      return 'unauth';
     }
   }
 
@@ -67,7 +63,5 @@ export class AuthService {
     this.showBtn = false;
     // this.location.replaceState('/');
     this._router.navigate(['login']);
-
-
   }
 }

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {Router} from '@angular/router';
+import { Router } from '@angular/router';
 import { AuthService } from './authentication/auth.service';
 import { PageVisitTrackerService } from './page-visit-tracker.service';
 import { user } from './user';
@@ -22,15 +22,14 @@ export class AppComponent {
   userType: string = '';
 
   ngOnInit() {
-
-    if(localStorage.getItem('user')){
-    this.showBtn =  this.auth.showBtn
+    if (localStorage.getItem('user')) {
+      this.showBtn = this.auth.showBtn;
     }
     // this.router.navigate(['login']);
     this.auth.userType.subscribe((value) => (this.userType = value));
   }
 
- logout(){
-  this.auth.logout();
- }
+  logout() {
+    this.auth.logout();
+  }
 }

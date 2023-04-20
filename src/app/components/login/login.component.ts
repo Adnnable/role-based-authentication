@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/authentication/auth.service';
+
 import { PageVisitTrackerService } from 'src/app/page-visit-tracker.service';
 import { user } from 'src/app/user';
 
@@ -17,10 +18,14 @@ export class LoginComponent {
     private pageVisitTracker: PageVisitTrackerService
   ) {}
 
-  onInit() {}
+  ngOnInit() {
+    // if (localStorage.getItem('user')) {
+
+    // }
+    this.auth.showBtn = false;
+  }
 
   onSubmit(username: string, password: string) {
-    
     this.user.username = username;
     this.user.password = password;
     console.log(
@@ -30,9 +35,11 @@ export class LoginComponent {
         this.user +
         'user'
     );
-    this.auth.login(this.user.username, this.user.password);
-
-    this.invokeVisitTracker();
+    if (this.auth.login(this.user.username, this.user.password) === 'unauth') {
+      alert('Please Enter Valid Username/Password..!!');
+    } else {
+      this.invokeVisitTracker();
+    }
   }
 
   invokeVisitTracker() {
@@ -43,6 +50,7 @@ export class LoginComponent {
     }
 
     const userData = { role: _role, username: this.user.username };
-    this.pageVisitTracker.trackPageVisit(userData);
+    //this.pageVisitTracker.trackPageVisit(userData);
+    this.pageVisitTracker._trackPageVisit(userData);
   }
 }

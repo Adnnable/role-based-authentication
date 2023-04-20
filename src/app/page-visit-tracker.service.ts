@@ -5,17 +5,23 @@ import { Router, NavigationEnd } from '@angular/router';
   providedIn: 'root',
 })
 export class PageVisitTrackerService {
-  constructor(private router: Router) {}
+  constructor(private router: Router) { }
 
+
+
+  //if the updated time and count of every user login required 
 
   trackPageVisit(role: any) {
-    
+
     console.log(role);
 
     if (role.role === 'member') {
       let localData: any = localStorage.getItem('visited page');
       localData = JSON.parse(localData);
-      if (localData) {
+      console.log(localData, 'localData');
+
+      let tempData: any[] = [];
+      if (localData) {   // if users available on localstorage
 
         //updating value to existing user  
         let existingUser = false;
@@ -30,7 +36,7 @@ export class PageVisitTrackerService {
           return user;
         });
 
-        let tempData: any[] = [];
+
 
 
         if (!existingUser) {  // if a new user is added
@@ -40,33 +46,73 @@ export class PageVisitTrackerService {
               role: role.role,
               count: 1,
               time: new Date().toLocaleString(),
-             // page: ['Home']
+              // page: ['Home']
             },
           ];
         }
 
-        // set item for both
-        localStorage.setItem(
-          'visited page',
-          JSON.stringify([...localData, ...tempData])
-        );
-      } else {
+
+      }
+      else {
 
         // for empty data source add a new user
-        localStorage.setItem(
-          'visited page',
-          JSON.stringify([
-            {
-              username: role.username,
-              role: role.role,
-              count: 1,
-              time: new Date().toLocaleString(),
-              //page: ['Home']
-            },
-          ])
-        );
+        localData = [];
+        tempData = [
+          {
+            username: role.username,
+            role: role.role,
+            count: 1,
+            time: new Date().toLocaleString(),
+            // page: ['Home']
+          },
+        ];
       }
+
+
+      // update localstoarge here
+      localStorage.setItem(
+        'visited page',
+        JSON.stringify([...localData, ...tempData])
+      );
+
+
+    }
+  }
+
+
+  //if the time every user login required 
+
+  _trackPageVisit(role: any) {
+
+    console.log(role);
+
+    if (role.role === 'member') {
+      let localData: any = localStorage.getItem('visited page');
+      localData = JSON.parse(localData);
+      if (localData == null) {
+        localData = [];
+      }
+
       
+      let tempData: any[] = [];
+      tempData = [
+        {
+          username: role.username,
+          role: role.role,
+          count: 1,
+          time: new Date().toLocaleString(),
+          // page: ['Home']
+        },
+      ];
+
+
+      // update localstoarge here
+      localStorage.setItem(
+        'visited page',
+        JSON.stringify([...localData, ...tempData])
+      );
+
+
     }
   }
 }

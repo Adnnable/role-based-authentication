@@ -1,6 +1,6 @@
 <div style="height: 5vh">
   <button
-  class="btn btn-dark "
+    class="btn btn-dark"
     (click)="logout()"
     [style]="this.auth.showBtn ? 'display: block' : 'display: none'"
   >
@@ -11,15 +11,15 @@
 <div class="basic" color="basic">
   <div>
     <button
-    class="btn btn-dark "
+      class="btn btn-dark"
       routerLink="/home"
       [style]="this.auth.showBtn ? 'display: block' : 'display: none'"
     >
       Home
     </button>
     <button
-    class="btn btn-dark "
-      *ngIf="userType === 'admin'"
+      class="btn btn-dark"
+      *ngIf="userType === 'admin@localhost'"
       routerLink="home/summary"
       [style]="this.auth.showBtn ? 'display: block' : 'display: none'"
     >
