@@ -1,0 +1,50 @@
+
+.container{
+  
+  background-color:#fff;
+
+}
+    .form-body{
+
+      width: 400px;
+      padding:  20px;
+      margin: auto;
+      background-color: #b0aeae;
+      border: none;
+      border-radius: 12px;
+    }
+    input{
+      margin-left: 10px;
+        /* margin-top: 10px; */
+        height: 40px;
+        border: 2px solid #eee;
+        border-radius: 10px;
+      }
+      .input:focus {
+        box-shadow: none;
+        border: 2px solid #039be5;
+      }
+
+    
+      .confirm-button {
+        height: 40px;
+        border-radius: 10px;
+      }
+
+
+    .hidden {
+      border: 0;
+      clip: rect(0 0 0 0);
+      height: 1px;
+      margin: -1px;
+      overflow: hidden;
+      padding: 0;
+      position: absolute;
+      width: 1px;
+    }
+    
+    .text--center {
+      text-align: center;
+    }
+    
+    

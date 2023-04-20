@@ -1,0 +1,24 @@
+<h3 class="text-center py-3">User Activity Summary</h3>
+
+<div class="table-responsive">
+
+  <table class="table table-dark align-center" style="width:70%; margin: auto;">
+    <thead>
+      <tr>
+        <th scope="col">Username</th>
+        <th scope="col">Role</th>
+        <th scope="col">Visit Count</th>
+        <th scope="col">Timestamp</th>
+        <!-- <th>Page Visit</th> -->
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of localData" >
+        <td>{{item.username}}</td>
+        <td>{{ item.role }}</td>
+        <td>{{ item.count }}</td>
+        <td>{{ item.time }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

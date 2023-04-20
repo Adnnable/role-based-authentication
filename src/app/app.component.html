@@ -1,0 +1,30 @@
+<div style="height: 5vh">
+  <button
+  class="btn btn-dark "
+    (click)="logout()"
+    [style]="this.auth.showBtn ? 'display: block' : 'display: none'"
+  >
+    <span class="m1">Log Out</span>
+  </button>
+</div>
+
+<div class="basic" color="basic">
+  <div>
+    <button
+    class="btn btn-dark "
+      routerLink="/home"
+      [style]="this.auth.showBtn ? 'display: block' : 'display: none'"
+    >
+      Home
+    </button>
+    <button
+    class="btn btn-dark "
+      *ngIf="userType === 'admin'"
+      routerLink="home/summary"
+      [style]="this.auth.showBtn ? 'display: block' : 'display: none'"
+    >
+      Summary
+    </button>
+  </div>
+</div>
+<router-outlet></router-outlet>
